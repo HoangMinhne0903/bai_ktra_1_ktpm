@@ -87,4 +87,18 @@ public class LoginE2ETest extends BaseTest {
                 .as("Hệ thống phải báo lỗi tài khoản không đúng")
                 .isTrue();
     }
+
+    @Test
+    @Order(6)
+    @Story("TC06 - Security & Authentication")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("TC06: Sai cả Tên đăng nhập và Mật khẩu")
+    @Description("Kiểm tra hệ thống từ chối đăng nhập khi cả tên đăng nhập và mật khẩu đều không đúng")
+    public void testTC06_WrongBoth() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        loginPage.loginAs("fake_user_9999", "fake_pass_9999");
+        assertThat(loginPage.hasErrorText("Tài khoản hoặc mật khẩu không đúng") || loginPage.hasErrorText("Tài khoản không đúng"))
+                .as("Hệ thống phải báo lỗi tài khoản hoặc mật khẩu không đúng")
+                .isTrue();
+    }
 }
