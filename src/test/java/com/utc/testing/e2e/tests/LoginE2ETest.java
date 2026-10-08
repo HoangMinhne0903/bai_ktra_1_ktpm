@@ -218,4 +218,22 @@ public class LoginE2ETest extends BaseTest {
                 .as("Thuộc tính type của ô mật khẩu bắt buộc phải là 'password'")
                 .isEqualToIgnoringCase("password");
     }
+
+    @Test
+    @Order(15)
+    @Story("TC15 - Integration")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("TC15: Kiểm tra nút Đăng nhập bằng e-mail UTC (Google SSO)")
+    @Description("Kiểm tra tính sẵn sàng của nút đăng nhập qua SSO email trường UTC (Slide 31)")
+    public void testTC15_LoginWithUtcEmailButton() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        assertThat(loginPage.isUtcEmailButtonDisplayed())
+                .as("Nút đăng nhập Email UTC phải hiển thị")
+                .isTrue();
+        String href = loginPage.getUtcEmailButtonHref();
+        assertThat(href)
+                .as("Đường dẫn nút e-mail UTC phải chứa liên kết OAuth/SSO hợp lệ")
+                .isNotNull()
+                .satisfies(link -> assertThat(link.toLowerCase()).containsAnyOf("accounts.google", "oauth", "login", "google"));
+    }
 }
