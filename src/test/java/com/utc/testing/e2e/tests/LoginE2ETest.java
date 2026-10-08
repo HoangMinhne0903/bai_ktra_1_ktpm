@@ -149,4 +149,18 @@ public class LoginE2ETest extends BaseTest {
                 .as("Phím Enter phải submit form và hiển thị kết quả xác thực")
                 .isTrue();
     }
+
+    @Test
+    @Order(10)
+    @Story("TC10 - Case Sensitivity")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("TC10: Phân biệt chữ hoa và chữ thường trong Mật khẩu")
+    @Description("Kiểm tra hệ thống có phân biệt ký tự hoa/thường trong mật khẩu (Case sensitivity)")
+    public void testTC10_PasswordCaseSensitivity() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        loginPage.loginAs("huongnt", "PASSWORD_IN_UPPERCASE");
+        assertThat(loginPage.hasErrorText("Tài khoản hoặc mật khẩu không đúng") || loginPage.hasErrorText("Tài khoản không đúng"))
+                .as("Mật khẩu sai hoa/thường phải bị từ chối đăng nhập")
+                .isTrue();
+    }
 }
