@@ -236,4 +236,19 @@ public class LoginE2ETest extends BaseTest {
                 .isNotNull()
                 .satisfies(link -> assertThat(link.toLowerCase()).containsAnyOf("accounts.google", "oauth", "login", "google"));
     }
+
+    @Test
+    @Order(16)
+    @Story("TC16 - UI Verification")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("TC16: Kiểm tra đầy đủ các thành phần giao diện Đăng nhập")
+    @Description("Đảm bảo toàn bộ thành phần cốt lõi của form đăng nhập xuất hiện đầy đủ trên màn hình")
+    public void testTC16_VerifyUIElements() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        assertThat(loginPage.isUsernameFieldDisplayed()).as("Ô nhập Username phải hiển thị").isTrue();
+        assertThat(loginPage.isPasswordFieldDisplayed()).as("Ô nhập Password phải hiển thị").isTrue();
+        assertThat(loginPage.isLoginButtonDisplayed()).as("Nút Đăng nhập phải hiển thị").isTrue();
+        assertThat(loginPage.isUtcEmailButtonDisplayed()).as("Nút Email UTC phải hiển thị").isTrue();
+        assertThat(loginPage.isForgotPasswordLinkDisplayed()).as("Liên kết Quên mật khẩu phải hiển thị").isTrue();
+    }
 }
