@@ -163,4 +163,18 @@ public class LoginE2ETest extends BaseTest {
                 .as("Mật khẩu sai hoa/thường phải bị từ chối đăng nhập")
                 .isTrue();
     }
+
+    @Test
+    @Order(11)
+    @Story("TC11 - Boundary & Sanitization")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("TC11: Tên đăng nhập chứa khoảng trắng ở đầu hoặc cuối (Trim)")
+    @Description("Kiểm tra hệ thống xử lý khoảng trắng đầu/cuối của tên đăng nhập không làm crash ứng dụng")
+    public void testTC11_UsernameLeadingTrailingSpaces() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        loginPage.loginAs("  huongnt  ", "password123");
+        assertThat(loginPage.getPageTitle())
+                .as("Trang vẫn phải hiển thị bình thường sau khi submit")
+                .isNotNull();
+    }
 }
