@@ -177,4 +177,18 @@ public class LoginE2ETest extends BaseTest {
                 .as("Trang vẫn phải hiển thị bình thường sau khi submit")
                 .isNotNull();
     }
+
+    @Test
+    @Order(12)
+    @Story("TC12 - Validation")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("TC12: Tên đăng nhập chỉ chứa toàn khoảng trắng")
+    @Description("Kiểm tra validation khi nhập toàn khoảng trắng vào trường Tên đăng nhập")
+    public void testTC12_UsernameOnlySpaces() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        loginPage.loginAs("     ", "password123");
+        assertThat(loginPage.hasErrorText("Bạn chưa nhập tên đăng nhập") || loginPage.hasErrorText("Tài khoản không đúng") || loginPage.hasErrorText("Tài khoản hoặc mật khẩu không đúng"))
+                .as("Khoảng trắng toàn bộ phải bị từ chối đăng nhập")
+                .isTrue();
+    }
 }
