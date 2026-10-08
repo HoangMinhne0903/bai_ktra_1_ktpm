@@ -135,4 +135,18 @@ public class LoginE2ETest extends BaseTest {
                 .isFalse();
         loginPage.clickLogin();
     }
+
+    @Test
+    @Order(9)
+    @Story("TC09 - Usability")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("TC09: Nhấn phím Enter tại ô Mật khẩu để gửi form")
+    @Description("Kiểm tra trải nghiệm phím bấm: Gửi form đăng nhập bằng cách nhấn phím Enter tại ô mật khẩu")
+    public void testTC09_SubmitByEnterKey() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        loginPage.submitByEnter("huongnt", "wrong_pass_123");
+        assertThat(loginPage.hasErrorText("Tài khoản hoặc mật khẩu không đúng") || loginPage.hasErrorText("Tài khoản không đúng"))
+                .as("Phím Enter phải submit form và hiển thị kết quả xác thực")
+                .isTrue();
+    }
 }
