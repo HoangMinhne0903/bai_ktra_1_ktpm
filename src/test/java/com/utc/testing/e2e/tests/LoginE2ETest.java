@@ -101,4 +101,21 @@ public class LoginE2ETest extends BaseTest {
                 .as("Hệ thống phải báo lỗi tài khoản hoặc mật khẩu không đúng")
                 .isTrue();
     }
+
+    @Test
+    @Order(7)
+    @Story("TC07 - Session Persistence")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("TC07: Đăng nhập với tuỳ chọn Giữ tôi luôn đăng nhập")
+    @Description("Kiểm tra chức năng lưu phiên làm việc với checkbox persistent (Slide 38)")
+    public void testTC07_LoginWithPersistent() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        loginPage.enterUsername("huongnt");
+        loginPage.enterPassword("password123");
+        loginPage.setPersistent(true);
+        assertThat(loginPage.isPersistentChecked())
+                .as("Checkbox persistent phải ở trạng thái được tích chọn")
+                .isTrue();
+        loginPage.clickLogin();
+    }
 }
