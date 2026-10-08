@@ -118,4 +118,21 @@ public class LoginE2ETest extends BaseTest {
                 .isTrue();
         loginPage.clickLogin();
     }
+
+    @Test
+    @Order(8)
+    @Story("TC08 - Session Persistence")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("TC08: Đăng nhập không chọn Giữ tôi luôn đăng nhập")
+    @Description("Kiểm tra hành vi mặc định khi không kích hoạt checkbox ghi nhớ đăng nhập")
+    public void testTC08_LoginWithoutPersistent() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        loginPage.enterUsername("huongnt");
+        loginPage.enterPassword("password123");
+        loginPage.setPersistent(false);
+        assertThat(loginPage.isPersistentChecked())
+                .as("Checkbox persistent không được tích chọn")
+                .isFalse();
+        loginPage.clickLogin();
+    }
 }
