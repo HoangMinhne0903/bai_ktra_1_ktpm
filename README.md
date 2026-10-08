@@ -24,6 +24,7 @@
    - [8.2. Chạy nhanh 1-Click bằng Batch Script](#82-chạy-nhanh-1-click-bằng-batch-script)
    - [8.3. Thực thi bằng dòng lệnh Maven Wrapper](#83-thực-thi-bằng-dòng-lệnh-maven-wrapper)
    - [8.4. Chạy ca kiểm thử đơn lẻ](#84-chạy-ca-kiểm-thử-đơn-lẻ)
+9. [Tổng Kết](#9-tổng-kết)
 
 ---
 
