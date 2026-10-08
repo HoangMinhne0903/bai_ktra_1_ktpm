@@ -191,4 +191,18 @@ public class LoginE2ETest extends BaseTest {
                 .as("Khoảng trắng toàn bộ phải bị từ chối đăng nhập")
                 .isTrue();
     }
+
+    @Test
+    @Order(13)
+    @Story("TC13 - Validation")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("TC13: Mật khẩu chỉ chứa toàn khoảng trắng")
+    @Description("Kiểm tra validation khi nhập toàn khoảng trắng vào trường Mật khẩu")
+    public void testTC13_PasswordOnlySpaces() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        loginPage.loginAs("huongnt", "     ");
+        assertThat(loginPage.hasErrorText("Bạn chưa nhập mật khẩu") || loginPage.hasErrorText("Tài khoản không đúng") || loginPage.hasErrorText("Tài khoản hoặc mật khẩu không đúng"))
+                .as("Mật khẩu toàn khoảng trắng phải báo lỗi")
+                .isTrue();
+    }
 }
