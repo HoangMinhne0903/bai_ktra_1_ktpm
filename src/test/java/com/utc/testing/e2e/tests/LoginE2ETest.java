@@ -44,4 +44,19 @@ public class LoginE2ETest extends BaseTest {
                 .as("Hệ thống phải hiển thị thông báo chưa nhập tên đăng nhập")
                 .isTrue();
     }
+
+    @Test
+    @Order(3)
+    @Story("TC03 - Validation")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("TC03: Nhập Tên đăng nhập, để trống Mật khẩu")
+    @Description("Kiểm tra hệ thống yêu cầu nhập mật khẩu khi chỉ điền tên đăng nhập")
+    public void testTC03_EmptyPassword() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        loginPage.enterUsername("huongnt");
+        loginPage.clickLogin();
+        assertThat(loginPage.hasErrorText("Bạn chưa nhập mật khẩu"))
+                .as("Hệ thống phải hiển thị thông báo chưa nhập mật khẩu")
+                .isTrue();
+    }
 }
