@@ -59,4 +59,18 @@ public class LoginE2ETest extends BaseTest {
                 .as("Hệ thống phải hiển thị thông báo chưa nhập mật khẩu")
                 .isTrue();
     }
+
+    @Test
+    @Order(4)
+    @Story("TC04 - Security & Authentication")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("TC04: Đúng Tên đăng nhập, sai Mật khẩu")
+    @Description("Kiểm tra xử lý bảo mật khi người dùng nhập đúng username nhưng sai password")
+    public void testTC04_CorrectUser_WrongPassword() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        loginPage.loginAs("huongnt", "wrong_password_123");
+        assertThat(loginPage.hasErrorText("Tài khoản hoặc mật khẩu không đúng") || loginPage.hasErrorText("Tài khoản không đúng"))
+                .as("Hệ thống phải báo lỗi tài khoản hoặc mật khẩu không đúng")
+                .isTrue();
+    }
 }
