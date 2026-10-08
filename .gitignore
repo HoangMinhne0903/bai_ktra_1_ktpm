@@ -8,3 +8,4 @@ allure-report/
 .vscode/
 .DS_Store
 *.log
+~$*.xlsx
