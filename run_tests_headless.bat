@@ -1,9 +1,9 @@
 @echo off
 chcp 65001 > nul
 echo ========================================================
-echo [UTC] CHẠY TỰ ĐỘNG 16 TEST CASES ĐĂNG NHẬP (HIỆN TRÌNH DUYỆT CHROME)
+echo [UTC] CHẠY TỰ ĐỘNG 16 TEST CASES (CHẾ ĐỘ HEADLESS - ẨN TRÌNH DUYỆT)
 echo ========================================================
-call .\mvnw.cmd test
+call .\mvnw.cmd test -Dheadless=true
 echo.
 echo ========================================================
 echo [UTC] ĐANG XUẤT ALLURE REPORT...
