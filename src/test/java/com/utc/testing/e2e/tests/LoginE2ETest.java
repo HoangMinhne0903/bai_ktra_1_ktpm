@@ -205,4 +205,17 @@ public class LoginE2ETest extends BaseTest {
                 .as("Mật khẩu toàn khoảng trắng phải báo lỗi")
                 .isTrue();
     }
+
+    @Test
+    @Order(14)
+    @Story("TC14 - Security")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("TC14: Kiểm tra tính năng ẩn mật khẩu (Masking password)")
+    @Description("Đảm bảo trường mật khẩu che dấu ký tự bảo mật với thuộc tính type='password'")
+    public void testTC14_PasswordMasking() {
+        LoginPage loginPage = new LoginPage(getDriver()).open();
+        assertThat(loginPage.getPasswordFieldType())
+                .as("Thuộc tính type của ô mật khẩu bắt buộc phải là 'password'")
+                .isEqualToIgnoringCase("password");
+    }
 }
